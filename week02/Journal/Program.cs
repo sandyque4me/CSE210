@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        // I Improved the process of saving and loading to save as a .csv file that could be opened
+        // in Excel 
         Journal journal = new Journal();
         Random random = new Random();
         string[] prompts = new string[]

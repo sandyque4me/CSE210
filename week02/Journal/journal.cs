@@ -4,8 +4,6 @@ using System.IO;
 
 public class Journal
 {
-    // Improve the process of saving and loading to save as a .csv file that could be opened
-    // in Excel 
     private List<Entry> entries = new List<Entry>();
 
     public void AddEntry(string prompt, string response)
