@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace ScriptureHider
 {
+    // I made my program work with a library of scriptures rather than a single one 
+    // and choose scriptures at random to present to the user.
     // Class to represent a single word in the scripture
     class Word
     {
