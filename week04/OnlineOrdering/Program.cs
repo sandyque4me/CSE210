@@ -165,4 +165,3 @@ class Program
         Console.WriteLine($"Total Cost: ${order2.GetTotalCost():F2}\n");
     }
 }
-c:\Users\PRIMESTAR SMS 2\Pictures\Screenshot week 04 ordering.png

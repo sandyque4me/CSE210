@@ -4,8 +4,10 @@ using System.Linq;
 
 namespace ScriptureHider
 {
-    // I made my program work with a library of scriptures rather than a single one 
-    // and choose scriptures at random to present to the user.
+    // My program works with a library of four scriptures rather than a single one. 
+    // It chooses scriptures at random to present to the user.
+    
+    
     // Class to represent a single word in the scripture
     class Word
     {
@@ -32,9 +34,9 @@ namespace ScriptureHider
     // Class to represent a scripture reference
     class Reference
     {
-        public string Book { get; private set; }
-        public string Chapter { get; private set; }
-        public string Verse { get; private set; }
+        private string Book { get; set; }
+        private string Chapter { get; set; }
+        private string Verse { get; set; }
 
         public Reference(string book, string chapter, string verse)
         {
@@ -52,8 +54,8 @@ namespace ScriptureHider
     // Class to represent a scripture, including text and reference
     class Scripture
     {
-        public Reference Reference { get; private set; }
-        public List<Word> Words { get; private set; }
+        private Reference Reference { get; set; }
+        private List<Word> Words { get; set; }
 
         public Scripture(string book, string chapter, string verse, string text)
         {
