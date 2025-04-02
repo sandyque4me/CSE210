@@ -7,12 +7,11 @@ namespace ScriptureHider
     // My program works with a library of four scriptures rather than a single one. 
     // It chooses scriptures at random to present to the user.
     
-    
     // Class to represent a single word in the scripture
     class Word
     {
-        public string Text { get; private set; }
-        public bool IsHidden { get; private set; }
+        private string Text { get; set; }
+        private bool IsHidden { get; set; }
 
         public Word(string text)
         {
@@ -34,9 +33,9 @@ namespace ScriptureHider
     // Class to represent a scripture reference
     class Reference
     {
-        private string Book { get; set; }
-        private string Chapter { get; set; }
-        private string Verse { get; set; }
+        private string Book { get; }
+        private string Chapter { get; }
+        private string Verse { get; }
 
         public Reference(string book, string chapter, string verse)
         {
@@ -54,8 +53,8 @@ namespace ScriptureHider
     // Class to represent a scripture, including text and reference
     class Scripture
     {
-        private Reference Reference { get; set; }
-        private List<Word> Words { get; set; }
+        private Reference Reference { get; }
+        private List<Word> Words { get; }
 
         public Scripture(string book, string chapter, string verse, string text)
         {
@@ -65,7 +64,7 @@ namespace ScriptureHider
 
         public bool HideRandomWords(int count)
         {
-            var availableWords = Words.Where(word => !word.IsHidden).ToList();
+            var availableWords = Words.Where(word => !word.ToString().Contains("_")).ToList();
             var random = new Random();
 
             if (availableWords.Count == 0) return false;
@@ -106,7 +105,7 @@ namespace ScriptureHider
                 Console.Clear();
                 Console.WriteLine(scripture);
                 Console.WriteLine("\nPress Enter to hide words or type 'quit' to exit.");
-                
+
                 string input = Console.ReadLine();
                 if (input?.ToLower() == "quit") break;
 
