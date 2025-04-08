@@ -1,5 +1,7 @@
 class ReflectionActivity : MindfulnessActivity
 {
+    public static int PerformanceCount = 0;
+
     private List<string> Prompts = new List<string>
     {
         "Think of a time when you stood up for someone else.",
@@ -14,6 +16,7 @@ class ReflectionActivity : MindfulnessActivity
 
     public override void PerformActivity()
     {
+        PerformanceCount++; // Increment counter
         Console.WriteLine(Prompts[new Random().Next(Prompts.Count)]);
         for (int i = 0; i < Duration / 3; i++)
         {

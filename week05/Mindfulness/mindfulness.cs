@@ -29,5 +29,12 @@ class MindfulnessActivity
         Console.WriteLine("Animation:...");
         System.Threading.Thread.Sleep(3000); // Simulate animation
     }
-}
 
+    public static void DisplayLog()
+    {
+        Console.WriteLine("\nActivity Performance Log:");
+        Console.WriteLine($"Breathing Activity: {BreathingActivity.PerformanceCount} times");
+        Console.WriteLine($"Reflection Activity: {ReflectionActivity.PerformanceCount} times");
+        Console.WriteLine($"Listing Activity: {ListingActivity.PerformanceCount} times\n");
+    }
+}
