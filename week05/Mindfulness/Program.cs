@@ -7,6 +7,8 @@ namespace MindfulnessApp
     {
         static void Main(string[] args)
         {
+            // I kept  a log of how many times the activities were performed and display to the user 
+           
             Dictionary<string, int> activityLog = new()
             {
                 { "Breathing Activity", 0 },
