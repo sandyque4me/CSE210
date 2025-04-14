@@ -5,8 +5,8 @@ namespace MindfulnessApp
 {
     public class MindfulnessActivity
     {
-        private string _name;
-        private string _description;
+        private string _name = "Default Name";
+        private string _description = "Default Description";
         protected int _duration;
 
         public void StartActivity()
