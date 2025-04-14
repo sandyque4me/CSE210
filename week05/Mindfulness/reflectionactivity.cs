@@ -1,27 +1,35 @@
-class ReflectionActivity : MindfulnessActivity
+﻿using System;
+using System.Collections.Generic;
+
+namespace MindfulnessApp
 {
-    public static int PerformanceCount = 0;
-
-    private List<string> Prompts = new List<string>
+    public class ReflectionActivity : MindfulnessActivity
     {
-        "Think of a time when you stood up for someone else.",
-        "Think of a time when you did something really difficult."
-    };
-
-    private List<string> Questions = new List<string>
-    {
-        "Why was this experience meaningful to you?",
-        "What did you learn about yourself?"
-    };
-
-    public override void PerformActivity()
-    {
-        PerformanceCount++; // Increment counter
-        Console.WriteLine(Prompts[new Random().Next(Prompts.Count)]);
-        for (int i = 0; i < Duration / 3; i++)
+        private static int _performanceCount;
+        private List<string> _prompts = new()
         {
-            Console.WriteLine(Questions[new Random().Next(Questions.Count)]);
-            ShowAnimation();
+            "Think of a time when you stood up for someone else.",
+            "Think of a time when you did something really difficult."
+        };
+        private List<string> _questions = new()
+        {
+            "Why was this experience meaningful to you?",
+            "What did you learn about yourself?"
+        };
+
+        public static int PerformanceCount => _performanceCount;
+
+        public override void PerformActivity()
+        {
+            _performanceCount++;
+            Console.WriteLine(_prompts[new Random().Next(_prompts.Count)]);
+            DateTime start = DateTime.Now;
+
+            while ((DateTime.Now - start).Seconds < _duration)
+            {
+                Console.WriteLine(_questions[new Random().Next(_questions.Count)]);
+                ShowAnimation();
+            }
         }
     }
 }

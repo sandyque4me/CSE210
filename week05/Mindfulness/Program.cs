@@ -1,35 +1,62 @@
-class Program
+﻿using System;
+using System.Collections.Generic;
+
+namespace MindfulnessApp
 {
-    // I Kept a log of how many times activities were performed in this program.
-    static void Main(string[] args)
+    class Program
     {
-        while (true)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Select an option:\n1. Breathing Activity\n2. Reflection Activity\n3. Listing Activity\n4. View Log\n5. Exit");
-            int choice = int.Parse(Console.ReadLine());
-
-            if (choice == 5) break;
-
-            MindfulnessActivity activity = choice switch
+            Dictionary<string, int> activityLog = new()
             {
-                1 => new BreathingActivity { Name = "Breathing Activity", Description = "This activity will help you relax by guiding you through slow breathing." },
-                2 => new ReflectionActivity { Name = "Reflection Activity", Description = "This activity will help you reflect on times you have shown strength and resilience." },
-                3 => new ListingActivity { Name = "Listing Activity", Description = "This activity will help you reflect on the good things in your life by listing as many items as you can." },
-                4 => null, // Option to view log
-                _ => throw new Exception("Invalid choice!")
+                { "Breathing Activity", 0 },
+                { "Reflection Activity", 0 },
+                { "Listing Activity", 0 }
             };
 
-            if (choice == 4)
+            while (true)
             {
-                MindfulnessActivity.DisplayLog(); // View log
-                continue;
+                Console.Clear();
+                Console.WriteLine("Select an option:");
+                Console.WriteLine("1. Breathing Activity");
+                Console.WriteLine("2. Reflection Activity");
+                Console.WriteLine("3. Listing Activity");
+                Console.WriteLine("4. View Log");
+                Console.WriteLine("5. Exit");
+                int choice = int.Parse(Console.ReadLine());
+
+                if (choice == 5) break;
+
+                MindfulnessActivity activity = choice switch
+                {
+                    1 => new BreathingActivity(),
+                    2 => new ReflectionActivity(),
+                    3 => new ListingActivity(),
+                    _ => throw new Exception("Invalid choice!")
+                };
+
+                if (choice == 4)
+                {
+                    MindfulnessActivity.DisplayLog(activityLog);
+                    continue;
+                }
+
+                activity.StartActivity();
+                activity.PerformActivity();
+                activity.EndActivity();
+
+                string activityName = choice switch
+                {
+                    1 => "Breathing Activity",
+                    2 => "Reflection Activity",
+                    3 => "Listing Activity",
+                    _ => throw new Exception("Invalid activity!")
+                };
+
+                activityLog[activityName]++;
             }
 
-            activity.StartActivity();
-            activity.PerformActivity();
-            activity.EndActivity();
+            Console.WriteLine("Thank you for using the Mindfulness App!");
         }
-
-        Console.WriteLine("Thank you for using the Mindfulness App!");
     }
 }

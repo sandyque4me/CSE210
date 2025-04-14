@@ -1,26 +1,35 @@
-class ListingActivity : MindfulnessActivity
+﻿using System;
+using System.Collections.Generic;
+
+namespace MindfulnessApp
 {
-    public static int PerformanceCount = 0;
-
-    private List<string> Prompts = new List<string>
+    public class ListingActivity : MindfulnessActivity
     {
-        "List people you appreciate.",
-        "List personal strengths."
-    };
-
-    public override void PerformActivity()
-    {
-        PerformanceCount++; // Increment counter
-        Console.WriteLine(Prompts[new Random().Next(Prompts.Count)]);
-        Console.WriteLine("Start listing items:");
-        int count = 0;
-
-        while (count < Duration)
+        private static int _performanceCount;
+        private List<string> _prompts = new()
         {
-            Console.Write("> ");
-            Console.ReadLine();
-            count++;
+            "List people you appreciate.",
+            "List personal strengths."
+        };
+
+        public static int PerformanceCount => _performanceCount;
+
+        public override void PerformActivity()
+        {
+            _performanceCount++;
+            Console.WriteLine(_prompts[new Random().Next(_prompts.Count)]);
+            Console.WriteLine("Start listing items:");
+            int count = 0;
+
+            DateTime start = DateTime.Now;
+            while ((DateTime.Now - start).Seconds < _duration)
+            {
+                Console.Write("> ");
+                Console.ReadLine();
+                count++;
+            }
+
+            Console.WriteLine($"You listed {count} items.");
         }
-        Console.WriteLine($"You listed {count} items.");
     }
 }

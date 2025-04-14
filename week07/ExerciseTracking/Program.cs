@@ -1,9 +1,25 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
-class Program
+namespace FitnessApp
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello World! This is the ExerciseTracking Project.");
+        static void Main(string[] args)
+        {
+            // Create activities
+            var activities = new List<Activity>
+            {
+                new Running(new DateTime(2023, 11, 3), 30, 4.8),
+                new Cycling(new DateTime(2023, 11, 3), 45, 25),
+                new Swimming(new DateTime(2023, 11, 3), 20, 30)
+            };
+
+            // Display summaries
+            foreach (var activity in activities)
+            {
+                Console.WriteLine(activity.GetSummary());
+            }
+        }
     }
 }
