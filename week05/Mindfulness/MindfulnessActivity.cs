@@ -5,6 +5,8 @@ namespace MindfulnessApp
 {
     public class MindfulnessActivity
     {
+        // I kept  a log of how many times the activities were performed and display to the user 
+
         private string _name = "Default Name";
         private string _description = "Default Description";
         protected int _duration;
