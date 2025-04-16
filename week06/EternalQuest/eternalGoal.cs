@@ -1,26 +1,14 @@
-﻿using System;
-
 class EternalGoal : Goal
 {
-    private int recordCount;
-
-    public EternalGoal(string name, int points) : base(name, points)
-    {
-        recordCount = 0;
-    }
+    public EternalGoal(string name, int points) : base(name, points) { }
 
     public override void RecordEvent()
     {
-        recordCount++;
-    }
-
-    public override bool IsCompleted()
-    {
-        return false; // Eternal goals are never completed
+        Console.WriteLine($"Event recorded for {Name}");
     }
 
     public override string GetProgress()
     {
-        return $"Recorded {recordCount} times";
+        return $"Ongoing: {Name}";
     }
 }

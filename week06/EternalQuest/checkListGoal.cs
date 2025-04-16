@@ -1,37 +1,50 @@
-﻿using System;
-
 class ChecklistGoal : Goal
 {
-    private int requiredCount;
-    private int currentCount;
-    private int bonusPoints;
+    private int _targetCount;
+    private int _currentCount;
+    private int _bonusPoints;
 
-    public ChecklistGoal(string name, int points, int requiredCount, int bonusPoints)
+    public int TargetCount 
+    { 
+        get => _targetCount; 
+        private set => _targetCount = value; 
+    }
+    public int CurrentCount 
+    { 
+        get => _currentCount; 
+        private set => _currentCount = value; 
+    }
+    public int BonusPoints 
+    { 
+        get => _bonusPoints; 
+        private set => _bonusPoints = value; 
+    }
+
+    public ChecklistGoal(string name, int points, int targetCount, int bonusPoints) 
         : base(name, points)
     {
-        this.requiredCount = requiredCount;
-        this.currentCount = 0;
-        this.bonusPoints = bonusPoints;
+        TargetCount = targetCount;
+        CurrentCount = 0;
+        BonusPoints = bonusPoints;
     }
+
+    public bool IsCompleted() => CurrentCount >= TargetCount;
 
     public override void RecordEvent()
     {
-        currentCount++;
-    }
-
-    public override bool IsCompleted()
-    {
-        return currentCount >= requiredCount;
+        if (!IsCompleted())
+        {
+            CurrentCount++;
+            Console.WriteLine($"Event recorded for {Name}. Progress: {CurrentCount}/{TargetCount}");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} has already been completed!");
+        }
     }
 
     public override string GetProgress()
     {
-        return $"Completed {currentCount}/{requiredCount} times";
-    }
-
-    public int GetBonusPoints()
-    {
-        return IsCompleted() ? bonusPoints : 0;
+        return $"Progress: {CurrentCount}/{TargetCount} - {Name}";
     }
 }
-

@@ -1,55 +1,79 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 class Program
 {
-    private List<Goal> goals = new List<Goal>();
-    private int score = 0;
+    // I Add additional kinds of goals, such as the ability to make progress towards a large goal 
+    // and negative goals where they lose points for bad habits.
+    private List<Goal> _goals = new List<Goal>();
+    private int _score;
+
+    public int Score 
+    { 
+        get => _score; 
+        private set => _score = value; 
+    }
 
     public void AddGoal(Goal goal)
     {
-        goals.Add(goal);
+        _goals.Add(goal);
     }
 
-    public void RecordEvent(string goalName)
+    public Goal CreateGoal(string type, string name, int points, int target = 0, int bonus = 0)
+{
+    return type switch
     {
-        foreach (var goal in goals)
+        "1" => new SimpleGoal(name, points),
+        "2" => new EternalGoal(name, points),
+        "3" => new ChecklistGoal(name, points, target, bonus),
+        "4" => new ProgressiveGoal(name, points),
+        "5" => new NegativeGoal(name, points),
+        _ => throw new ArgumentException("Invalid selection")
+    };
+}
+
+
+   public void RecordEvent(string goalName)
+    {
+        foreach (var goal in _goals)
         {
-            if (goal.GetName() == goalName)
+            if (goal.Name == goalName) // Use the Name property instead of GetName()
             {
                 goal.RecordEvent();
-                score += goal.GetPoints();
+                Score += goal.Points;
                 if (goal is ChecklistGoal checklistGoal && checklistGoal.IsCompleted())
                 {
-                    score += checklistGoal.GetBonusPoints();
+                    Score += checklistGoal.BonusPoints;
                 }
                 return;
             }
         }
         Console.WriteLine("Goal not found!");
     }
-    
-   public void DisplayAnimatedProgress(string message)
+
+
+    public void DisplayAnimatedProgress(string message)
     {
         for (int i = 0; i < message.Length; i++)
         {
             Console.Write(message[i]);
-            System.Threading.Thread.Sleep(100); // Delay for animation
+            System.Threading.Thread.Sleep(100);
         }
         Console.WriteLine();
     }
 
     public void DisplayGoals()
     {
-        foreach (var goal in goals)
+        Console.WriteLine("\nGoals:");
+        foreach (var goal in _goals)
         {
-            Console.WriteLine($"{goal.GetProgress()} {goal.GetName()}");
+            Console.WriteLine($"{goal.GetProgress()} | {goal.Name}"); // Use Name property
         }
     }
 
     public void DisplayScore()
     {
-        Console.WriteLine($"Current Score: {score}");
+        Console.WriteLine($"Current Score: {Score}");
     }
 
     static void Main()

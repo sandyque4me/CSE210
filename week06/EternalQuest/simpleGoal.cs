@@ -1,26 +1,15 @@
-﻿using System;
 
 class SimpleGoal : Goal
 {
-    private bool isCompleted;
-
-    public SimpleGoal(string name, int points) : base(name, points)
-    {
-        isCompleted = false;
-    }
+    public SimpleGoal(string name, int points) : base(name, points) { }
 
     public override void RecordEvent()
     {
-        isCompleted = true;
-    }
-
-    public override bool IsCompleted()
-    {
-        return isCompleted;
+        Console.WriteLine($"Event recorded for {Name}");
     }
 
     public override string GetProgress()
     {
-        return isCompleted ? "[X]" : "[ ]";
+        return $"Completed: {Name}";
     }
 }
